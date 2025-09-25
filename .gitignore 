@@ -1,0 +1,17 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Build
+target/
+out/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment / secrets
+*.env
