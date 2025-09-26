@@ -34,3 +34,21 @@ Whether you want to **track workouts**, **monitor diet**, or get **personalized 
 ---
 
 ## 📂 Project Structure  
+fit-ai/
+│── backend/ (Spring Boot Services)
+│ ├── controller/
+│ ├── service/
+│ ├── repository/
+│ ├── entity/
+│ ├── exception/
+│ └── dto/
+│
+│── frontend/ (React App)
+│ ├── src/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ ├── hooks/
+│ │ └── utils/
+│
+│── docs/ (Documentation + Diagrams)
+│── README.md
