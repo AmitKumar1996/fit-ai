@@ -55,30 +55,6 @@ fit-ai/
 
 ---
 
-# userService - Actuator Endpoints
-
-Spring Boot Actuator provides monitoring endpoints for your application.
-
-## Endpoints
-
-- **Health Check**  
-URL: `http://localhost:8080/actuator/health`  
-Test via curl:  
-```bash
-curl http://localhost:8080/actuator/health
-
-# userService - Monitoring & API Documentation
-
-Spring Boot Actuator and Swagger provide monitoring and API documentation for your application.
-
-## Actuator Endpoints
-
-- **Health Check**  
-URL: `http://localhost:8080/actuator/health`  
-Test via curl:  
-```bash
-curl http://localhost:8080/actuator/health
-
 
 
 ## ⚙️ Installation & Setup  
