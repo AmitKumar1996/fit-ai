@@ -1,6 +1,6 @@
 package com.futness.userService.service;
 
-import com.futness.userService.UserRepository;
+import com.futness.userService.repository.UserRepository;
 import com.futness.userService.dto.RegisterRequest;
 import com.futness.userService.dto.UserResponse;
 import com.futness.userService.exception.EmailAlreadyExistsException;

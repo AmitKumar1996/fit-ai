@@ -1,10 +1,8 @@
-package com.futness.userService;
+package com.futness.userService.repository;
 
-import com.futness.userService.dto.RegisterRequest;
 import com.futness.userService.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
