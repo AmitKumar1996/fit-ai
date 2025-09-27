@@ -1,5 +1,6 @@
 package com.futness.userService.dto;
 
+import com.futness.userService.dto.RegisterRequest;
 
 import lombok.Data;
 
