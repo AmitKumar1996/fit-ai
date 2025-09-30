@@ -15,9 +15,14 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
 
+
+//In JPA / Hibernate → we use @Entity to tell the ORM: “this class is a database entity, map it to a table.
+
+//In Spring Data MongoDB → we use @Document to tell Spring: “this class is a MongoDB document, map it to a collection.
+
 @Document(collation ="activities")
 @Data
-@Builder
+@Builder        //  a chainable, flexible, human-friendly object creator.
 @AllArgsConstructor
 @NoArgsConstructor
 public class Activity {
@@ -28,8 +33,10 @@ public class Activity {
     private  Integer duration;
     private LocalDateTime starTime;
 
+    private Integer caloriesBurned;
+
     @Field("matrics")
-    private Map<String, Objects> additionalMatrix;
+    private Map<String, Objects> additionalMatrics;
     @LastModifiedDate
     private  LocalDateTime upadatedAt;
 
