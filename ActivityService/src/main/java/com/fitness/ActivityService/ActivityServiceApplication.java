@@ -50,7 +50,7 @@ public class ActivityServiceApplication {
 		// Display Service Info Box
 		System.out.println();
 		System.out.println(PURPLE + "╔════════════════════════════════════════════════════════════════════════════════╗" + RESET);
-		System.out.println(PURPLE + "║" + CYAN + "                     🏋️‍♂️  FITNESS ACTIVITY SERVICE  🚴‍♀️      " + PURPLE + "║" + RESET);
+		System.out.println(PURPLE + "║" + CYAN + "                     🏋️‍♂️  FITNESS ACTIVITY SERVICE  🚴‍♀️      " + PURPLE + "           ║" + RESET);
 		System.out.println(PURPLE + "╠════════════════════════════════════════════════════════════════════════════════╣" + RESET);
 		System.out.println(GREEN + "🟢 Service Name: " + RESET + serviceName);
 
