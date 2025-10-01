@@ -1,12 +1,80 @@
-package com.fitness.ActivityService;
+package com.futness.userService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.Environment;
 
 @SpringBootApplication
-public class ActivityServiceApplication {
+public class UserServiceApplication {
 
-	// New method: print microservices system design with emojis
+	// ANSI color codes
+	public static final String RESET = "\u001B[0m";
+	public static final String GREEN = "\u001B[32m";
+	public static final String YELLOW = "\u001B[33m";
+	public static final String RED = "\u001B[31m";
+	public static final String BLUE = "\u001B[34m";
+	public static final String CYAN = "\u001B[36m";
+	public static final String PURPLE = "\u001B[35m";
+
+	public static void main(String[] args) throws InterruptedException {
+		ConfigurableApplicationContext context = SpringApplication.run(UserServiceApplication.class, args);
+		Environment env = context.getEnvironment();
+
+		// 🔹 Dynamic values from application.yml
+		String serviceName = env.getProperty("spring.application.name", "Unknown Service");
+		String activeProfile = env.getActiveProfiles().length > 0 ? env.getActiveProfiles()[0] : "default";
+		String serverPort = env.getProperty("server.port", "8080");
+		String dbUrl = env.getProperty("spring.datasource.url", "Not Configured");
+		String techStack = env.getProperty("app.tech-stack", "Not Defined");
+
+		// Profile color logic
+		String profileColor = activeProfile.equals("prod") ? RED :
+				activeProfile.equals("dev") ? YELLOW : BLUE;
+
+		int totalWidth = 80;
+
+		// Print service info table
+		System.out.println();
+		System.out.println(PURPLE + "╔" + "═".repeat(totalWidth - 2) + "╗" + RESET);
+		String title = "🏋️‍♂️  " + serviceName.toUpperCase() + "  🚴‍♀️";
+		int padding = (totalWidth - 2 - title.length()) / 2;
+		System.out.println(PURPLE + "║" + " ".repeat(padding) + CYAN + title +
+				PURPLE + " ".repeat(totalWidth - 2 - title.length() - padding) + "║" + RESET);
+		System.out.println(PURPLE + "╠" + "═".repeat(totalWidth - 2) + "╣" + RESET);
+
+		System.out.println(formatRow("Service Name", serviceName, YELLOW, totalWidth));
+		System.out.println(formatRow("Profile", activeProfile, profileColor, totalWidth));
+		System.out.println(formatRow("Server Port", serverPort, GREEN, totalWidth));
+		System.out.println(formatRow("Database URL", dbUrl, GREEN, totalWidth));
+		System.out.println(formatRow("Tech Stack", techStack, GREEN, totalWidth));
+
+		System.out.println(PURPLE + "╚" + "═".repeat(totalWidth - 2) + "╝" + RESET);
+		System.out.println();
+
+		// Print system design diagram
+		printSystemDesign();
+
+		// Animated Boot Progress
+		System.out.println(CYAN + "🎉 Booting " + serviceName + "..." + RESET);
+		int totalSteps = 20;
+		for (int i = 1; i <= totalSteps; i++) {
+			int progress = i * 100 / totalSteps;
+			String bar = "▓".repeat(i) + "░".repeat(totalSteps - i);
+			System.out.print("\r" + GREEN + "[" + bar + "] " + progress + "%" + RESET);
+			Thread.sleep(100);
+		}
+
+		System.out.println("\n" + GREEN + "✅ Boot complete! " + CYAN + serviceName + " is up and running!" + RESET);
+	}
+
+	private static String formatRow(String label, String value, String valueColor, int totalWidth) {
+		int contentWidth = totalWidth - 4; // 2 for borders, 2 for spaces
+		String content = String.format("%-15s : %s", label, valueColor + value + RESET);
+		int realLength = content.replaceAll("\u001B\\[[;\\d]*m", "").length();
+		return PURPLE + "║ " + content + " ".repeat(Math.max(0, contentWidth - realLength)) + " ║" + RESET;
+	}
+
 	private static void printSystemDesign() {
 		System.out.println();
 		System.out.println(PURPLE + "╔════════════════════════════════════════════════════════╗" + RESET);
@@ -25,66 +93,5 @@ public class ActivityServiceApplication {
 
 		System.out.println(PURPLE + "╚════════════════════════════════════════════════════════╝" + RESET);
 		System.out.println();
-	}
-
-	// ANSI color codes
-	public static final String RESET = "\u001B[0m";
-	public static final String GREEN = "\u001B[32m";
-	public static final String YELLOW = "\u001B[33m";
-	public static final String RED = "\u001B[31m";
-	public static final String BLUE = "\u001B[34m";
-	public static final String CYAN = "\u001B[36m";
-	public static final String PURPLE = "\u001B[35m";
-
-	public static void main(String[] args) throws InterruptedException {
-		String serviceName = "Fitness Activity Service";
-		String activeProfile = "default"; // can be dynamically fetched
-		String serverPort = "8080";
-		String dbURI = "mongodb://localhost:27017";
-		String techStack = "IntelliJ → Java → Spring Boot → Postman → CI/CD → AWS";
-
-		// Start Spring Boot
-		SpringApplication.run(ActivityServiceApplication.class, args);
-
-
-		// Display Service Info Box
-		System.out.println();
-		System.out.println(PURPLE + "╔════════════════════════════════════════════════════════════════════════════════╗" + RESET);
-		System.out.println(PURPLE + "║" + CYAN + "                     🏋️‍♂️  FITNESS ACTIVITY SERVICE  🚴‍♀️      " + PURPLE + "           ║" + RESET);
-		System.out.println(PURPLE + "╠════════════════════════════════════════════════════════════════════════════════╣" + RESET);
-		System.out.println(GREEN + "🟢 Service Name: " + RESET + serviceName);
-
-		// Dynamic profile color
-		String profileColor = switch (activeProfile.toLowerCase()) {
-			case "prod" -> RED;
-			case "dev" -> YELLOW;
-			default -> BLUE;
-		};
-		System.out.println(GREEN + "🟢 Profile     : " + profileColor + activeProfile + RESET);
-
-		System.out.println(GREEN + "📌 Server Port : " + RESET + serverPort);
-		System.out.println(GREEN + "🗄️ MongoDB URI : " + RESET + dbURI);
-		System.out.println(GREEN + "⚙️ Tech Stack  : " + RESET + techStack);
-		System.out.println(PURPLE + "╚════════════════════════════════════════════════════════════════════════════════╝" + RESET);
-		System.out.println();
-
-		// Animated Boot Loader
-		System.out.println(CYAN + "🎉 Booting " + serviceName + "..." + RESET);
-		int totalSteps = 20;
-		for (int i = 1; i <= totalSteps; i++) {
-			int progress = i * 100 / totalSteps;
-			String bar = "▓".repeat(i) + "░".repeat(totalSteps - i);
-			String spinner = switch (i % 4) {
-				case 0 -> "|";
-				case 1 -> "/";
-				case 2 -> "-";
-				default -> "\\";
-			};
-			System.out.print("\r" + GREEN + "[" + bar + "] " + progress + "% " + spinner + RESET);
-			Thread.sleep(150);
-		}
-
-		// Final Boot Complete
-		System.out.println("\n" + GREEN + "✅ Boot complete! " + CYAN + serviceName + " is up and running!" + RESET);
 	}
 }
