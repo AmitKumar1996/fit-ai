@@ -1,10 +1,10 @@
 package com.futness.userService.service;
 
-import com.futness.userService.repository.UserRepository;
 import com.futness.userService.dto.RegisterRequest;
 import com.futness.userService.dto.UserResponse;
 import com.futness.userService.exception.EmailAlreadyExistsException;
 import com.futness.userService.model.User;
+import com.futness.userService.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +54,9 @@ public class UserService {
         response.setUpdatedAt(user.getUpdatedAt());
 
         return response; // Return the populated response
+    }
+
+    public Boolean existByUserId(String userId) {
+        return repository.existsById(userId);
     }
 }

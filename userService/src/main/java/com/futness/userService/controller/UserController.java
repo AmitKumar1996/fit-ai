@@ -20,6 +20,12 @@ public class UserController {
     }
 
 
+//    @GetMapping("/{userId}/validate")
+//    public ResponseEntity<Boolean> ValidateUser(@PathVariable String userId){
+//        return ResponseEntity.ok(userService.existByUserId (userId));
+//    }
+
+
 
     @PostMapping("/register")
     public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest request){
