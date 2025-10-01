@@ -15,5 +15,5 @@ public class ActivityRequest {
     private Integer duration;
     private LocalDateTime starTime;
     private Integer caloriesBurned;
-    private Map<String, Objects> additionalMatrics;
+    private Map<String, Object> additionalMatrics;
 }

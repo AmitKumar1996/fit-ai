@@ -4,8 +4,7 @@ package com.fitness.ActivityService.Controller;
 import com.fitness.ActivityService.dto.ActivityRequest;
 import com.fitness.ActivityService.dto.ActivityResponce;
 import com.fitness.ActivityService.service.ActivityService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,14 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/activities")
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class ActivityController {
 
-    private ActivityService activityService;
+    private final ActivityService activityService;
 
-    @PostMapping()
+
+    @PostMapping
     public ResponseEntity<ActivityResponce> trackActivity(@RequestBody ActivityRequest request){
+        System.out.println("test1:->>>" + request);
         return  ResponseEntity.ok(activityService.trackActivity(request));
     }
 

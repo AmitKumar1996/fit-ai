@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,7 +19,8 @@ import java.util.Objects;
 
 //In Spring Data MongoDB → we use @Document to tell Spring: “this class is a MongoDB document, map it to a collection.
 
-@Document(collation ="activities")
+//@Document(collation ="ai-fit")
+@Document(collection = "activities")
 @Data
 @Builder        //  a chainable, flexible, human-friendly object creator.
 @AllArgsConstructor
@@ -36,7 +36,7 @@ public class Activity {
     private Integer caloriesBurned;
 
     @Field("matrics")
-    private Map<String, Objects> additionalMatrics;
+    private Map<String, Object> additionalMatrics;
     @LastModifiedDate
     private  LocalDateTime upadatedAt;
 

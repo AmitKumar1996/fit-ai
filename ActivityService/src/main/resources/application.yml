@@ -1,11 +1,26 @@
+# ================================
+# Activity Service Configuration
+# ================================
+
+server:
+  port: 8085  # Unique port for this microservice
+
 spring:
-application:
-  name: ActivityService
-data:
-  mongodb:
-    uri: mongodb://localhost:27017
-    database: aiActivityFitness
+  application:
+    name: ActivityService  # Unique service name registered in Eureka
 
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/fitnessDB  # MongoDB connection URI
+      database: fitnessDB
 
-  server:
-    port: 80885
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/  # Eureka server URL
+    register-with-eureka: true  # This service registers itself
+    fetch-registry: true        # Fetch info about other services
+
+  instance:
+    lease-renewal-interval-in-seconds: 10  # Frequency of heartbeats (default 30s)
+    lease-expiration-duration-in-seconds: 30  # When to consider service DOWN (default 90s)
