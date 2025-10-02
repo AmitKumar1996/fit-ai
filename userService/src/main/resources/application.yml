@@ -12,7 +12,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/fitness-micro-user  # PostgreSQL DB URL
     username: postgres
-    password: Developer@123
+    password: "Developer@123"
   jpa:
     hibernate:
       ddl-auto: update  # Auto-update DB schema
@@ -37,3 +37,4 @@ eureka:
   instance:
     lease-renewal-interval-in-seconds: 10  # Heartbeat interval
     lease-expiration-duration-in-seconds: 30  # When to consider service DOWN
+
