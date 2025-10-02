@@ -6,11 +6,13 @@ import com.futness.userService.exception.EmailAlreadyExistsException;
 import com.futness.userService.model.User;
 import com.futness.userService.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -56,7 +58,24 @@ public class UserService {
         return response; // Return the populated response
     }
 
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String BLUE = "\u001B[34m";
+    private static final String PURPLE = "\u001B[35m";
+    private static final String CYAN = "\u001B[36m";
+    private static final String RESET = "\u001B[0m";
+
+
+
+
     public Boolean existByUserId(String userId) {
+     //   log.info("Calling User Service for {}", userId);
+
+        log.info(RED + "C" + GREEN + "a" + YELLOW + "l" + BLUE + "l" + PURPLE + "i" + CYAN + "n" + RED + "g " +
+                GREEN + "U" + YELLOW + "s" + BLUE + "e" + PURPLE + "r " +
+                CYAN + "S" + RED + "e" + GREEN + "r" + YELLOW + "v" + BLUE + "i" + PURPLE + "c" + CYAN + "e" +
+                RESET + " for {}", userId);
         return repository.existsById(userId);
     }
 }
