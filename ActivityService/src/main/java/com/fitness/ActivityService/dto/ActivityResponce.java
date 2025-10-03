@@ -10,12 +10,12 @@ import java.util.Map;
 @Data
 public class ActivityResponce {
     private String id;
-    private  String userId;
+    private String userId;
     private ActivityType type;
-    private  Integer duration;
+    private Integer duration;
     private LocalDateTime starTime;
     private Integer caloriesBurned;
     private Map<String, Object> additionalMatrics;
-    private  LocalDateTime upadatedAt;
-    private  LocalDateTime createdAt;
+    private LocalDateTime upadatedAt;
+    private LocalDateTime createdAt;
 }

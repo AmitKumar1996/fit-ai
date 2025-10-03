@@ -28,9 +28,9 @@ import java.util.Objects;
 public class Activity {
 
     private String id;
-    private  String userId;
-    private  ActivityType type;
-    private  Integer duration;
+    private String userId;
+    private ActivityType type;
+    private Integer duration;
     private LocalDateTime starTime;
 
     private Integer caloriesBurned;
@@ -38,10 +38,10 @@ public class Activity {
     @Field("matrics")
     private Map<String, Object> additionalMatrics;
     @LastModifiedDate
-    private  LocalDateTime upadatedAt;
+    private LocalDateTime upadatedAt;
 
     @CreatedDate
-    private  LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
 
 }

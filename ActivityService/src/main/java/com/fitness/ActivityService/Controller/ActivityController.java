@@ -20,9 +20,9 @@ public class ActivityController {
 
 
     @PostMapping
-    public ResponseEntity<ActivityResponce> trackActivity(@RequestBody ActivityRequest request){
+    public ResponseEntity<ActivityResponce> trackActivity(@RequestBody ActivityRequest request) {
         System.out.println("test1:->>>" + request);
-        return  ResponseEntity.ok(activityService.trackActivity(request));
+        return ResponseEntity.ok(activityService.trackActivity(request));
     }
 
 }

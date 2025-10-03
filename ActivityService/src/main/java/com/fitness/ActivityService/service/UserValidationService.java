@@ -10,11 +10,6 @@ import org.springframework.web.reactive.function.client.WebClientRequestExceptio
 @RequiredArgsConstructor
 @Slf4j
 public class UserValidationService {
-private final WebClient userServiceWebClient;
-
-
-
-
     private static final String RED = "\u001B[31m";
     private static final String GREEN = "\u001B[32m";
     private static final String YELLOW = "\u001B[33m";
@@ -22,28 +17,28 @@ private final WebClient userServiceWebClient;
     private static final String PURPLE = "\u001B[35m";
     private static final String CYAN = "\u001B[36m";
     private static final String RESET = "\u001B[0m";
+    private final WebClient userServiceWebClient;
 
-public boolean validateUser(String userId){
-  //log.info("Calling User Service for {}", userId);
+    public boolean validateUser(String userId) {
+        //log.info("Calling User Service for {}", userId);
 
 
-    log.info(RED + "C" + GREEN + "a" + YELLOW + "l" + BLUE + "l" + PURPLE + "i" + CYAN + "n" + RED + "g " +
-            GREEN + "U" + YELLOW + "s" + BLUE + "e" + PURPLE + "r " +
-            CYAN + "S" + RED + "e" + GREEN + "r" + YELLOW + "v" + BLUE + "i" + PURPLE + "c" + CYAN + "e" +
-            RESET + " for {}", userId);
-    try{
-        return userServiceWebClient.get()
-                .uri("/api/users/{userId}/validate", userId)
-                .retrieve()
-                .bodyToMono(Boolean.class)
-                .block();
+        log.info(RED + "C" + GREEN + "a" + YELLOW + "l" + BLUE + "l" + PURPLE + "i" + CYAN + "n" + RED + "g " +
+                GREEN + "U" + YELLOW + "s" + BLUE + "e" + PURPLE + "r " +
+                CYAN + "S" + RED + "e" + GREEN + "r" + YELLOW + "v" + BLUE + "i" + PURPLE + "c" + CYAN + "e" +
+                RESET + " for {}", userId);
+        try {
+            return userServiceWebClient.get()
+                    .uri("/api/users/{userId}/validate", userId)
+                    .retrieve()
+                    .bodyToMono(Boolean.class)
+                    .block();
+        } catch (WebClientRequestException e) {
+            e.printStackTrace();
+
+        }
+        return false;
     }
-    catch (WebClientRequestException e){
-        e.printStackTrace();
-
-    }
-return  false;
-}
 
 
 }

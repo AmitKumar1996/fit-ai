@@ -21,13 +21,13 @@ public class ActivityService {
 
     public ActivityResponce trackActivity(ActivityRequest request) {
 
-       boolean isValidUser= userValidationService.validateUser(request.getUserId());
+        boolean isValidUser = userValidationService.validateUser(request.getUserId());
 
-       if(!isValidUser){
-           throw  new RuntimeException("Invalid User:"+request.getUserId());
-       }
+        if (!isValidUser) {
+            throw new RuntimeException("Invalid User:" + request.getUserId());
+        }
 
-        System.out.println("test2:->>>>>>"+request);
+        System.out.println("test2:->>>>>>" + request);
 
         Activity activity = Activity.builder()
 
@@ -40,15 +40,15 @@ public class ActivityService {
 
         Activity savedActivity = activityRepository.save(activity);
 
-        System.out.println("test2:->>>>>>"+savedActivity);
-        return  mapToResponse(savedActivity);
+        System.out.println("test2:->>>>>>" + savedActivity);
+        return mapToResponse(savedActivity);
 
 
     }
 
     private ActivityResponce mapToResponse(Activity activity) {
 
-        ActivityResponce responce=new ActivityResponce();
+        ActivityResponce responce = new ActivityResponce();
         responce.setId(activity.getId());
         responce.setUserId(activity.getUserId());
         responce.setType(activity.getType());
@@ -58,6 +58,6 @@ public class ActivityService {
         responce.setAdditionalMatrics(activity.getAdditionalMatrics());
         responce.setCreatedAt(activity.getCreatedAt());
         responce.setStarTime(activity.getStarTime());
-        return  responce;
+        return responce;
     }
 }

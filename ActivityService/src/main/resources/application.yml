@@ -3,24 +3,52 @@
 # ================================
 
 server:
-  port: 8085  # Unique port for this microservice
+  port: 8085  # Unique port for this microservice to avoid conflict with other services
 
 spring:
   application:
-    name: ActivityService  # Unique service name registered in Eureka
+    name: ActivityService  # Unique service name registered with Eureka for discovery
 
+  # MongoDB Configuration
   data:
     mongodb:
       uri: mongodb://localhost:27017/fitnessDB  # MongoDB connection URI
-      database: fitnessDB
+      database: fitnessDB  # MongoDB database name used by this microservice
 
+  # Kafka Configuration
+  kafka:
+    bootstrap-servers: localhost:9092  # Kafka broker address (host:port)
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # Serializer class for Kafka message keys (case-sensitive!)
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      # Serializer class for Kafka message values (JSON)
+
+# Kafka topic configuration
+kafka:
+  topic:
+    name: activity-events  # Topic where activity events are published
+
+# Eureka Discovery Client Configuration
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/  # Eureka server URL
-    register-with-eureka: true  # This service registers itself
-    fetch-registry: true        # Fetch info about other services
+    register-with-eureka: true  # This service registers itself with Eureka
+    fetch-registry: true        # Fetch info about other registered services
 
+  # Eureka Instance specific configuration
   instance:
-    lease-renewal-interval-in-seconds: 10  # Frequency of heartbeats (default 30s)
-    lease-expiration-duration-in-seconds: 30  # When to consider service DOWN (default 90s)
+    lease-renewal-interval-in-seconds: 10  # Frequency of heartbeats sent to Eureka (default 30s)
+    lease-expiration-duration-in-seconds: 30  # Time to consider service DOWN if no heartbeat (default 90s)
+
+# ================================
+# Notes / Troubleshooting
+# ================================
+# 1. Ensure Kafka is running on localhost:9092 and Zookeeper on 2181 before starting the service.
+# 2. The Kafka serializer class names are case-sensitive:
+#    - key-serializer: StringSerializer (uppercase 'S')
+#    - value-serializer: JsonSerializer (uppercase 'J' and 'S')
+# 3. MongoDB must be running and accessible at the URI specified.
+# 4. Eureka server must be running on localhost:8761 before starting this service.
+# 5. Adjust 'server.port' if you run multiple microservices locally to avoid port conflicts.

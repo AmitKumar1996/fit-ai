@@ -16,9 +16,9 @@ public class WebClientConfig {
      * Creates a WebClient.Builder bean that is load balanced.
      *
      * @LoadBalanced tells Spring Cloud to use Ribbon (or Spring Cloud LoadBalancer)
-     *               to resolve service names like "USERSERVICE" to actual instances
-     *               registered in Eureka.
-     *
+     * to resolve service names like "USERSERVICE" to actual instances
+     * registered in Eureka.
+     * <p>
      * This bean can be injected wherever you need a WebClient.Builder.
      */
     @Bean

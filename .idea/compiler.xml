@@ -3,23 +3,16 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for userService" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath>
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="userService" />
-      </profile>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eureka" />
         <module name="ActivityService" />
+        <module name="eureka-server" />
+        <module name="eureka" />
+        <module name="fitness-service" />
       </profile>
-      <profile name="Annotation profile for aiService" enabled="true">
+      <profile name="Annotation profile for userService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -27,6 +20,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="aiService" />
+        <module name="userService" />
       </profile>
     </annotationProcessing>
   </component>
@@ -35,6 +29,8 @@
       <module name="ActivityService" options="-parameters" />
       <module name="aiService" options="-parameters" />
       <module name="eureka" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="fitness-service" options="-parameters" />
       <module name="userService" options="-parameters" />
     </option>
   </component>
