@@ -1,7 +1,9 @@
 package com.fitness.aiService.controller;
 
+import com.fitness.aiService.service.RecommendationService;
 import lombok.RequiredArgsConstructor;
 import model.Recommendation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/recommendations")
 public class RecommendationController {
+
 
     private final RecommendationService recommendationService;
 
