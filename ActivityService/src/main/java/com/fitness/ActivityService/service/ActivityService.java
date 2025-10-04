@@ -7,6 +7,8 @@ import com.fitness.ActivityService.model.Activity;
 import com.fitness.ActivityService.repositort.ActivityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +19,11 @@ public class ActivityService {
     private final ActivityRepository activityRepository;
     @Autowired
     private final UserValidationService userValidationService;
+
+    private final KafkaTemplate<String, Activity> kafkaTemplate;
+    @Value("${kafka.topic.name}")
+    private  String topicName;
+
 
 
     public ActivityResponce trackActivity(ActivityRequest request) {
@@ -39,6 +46,13 @@ public class ActivityService {
                 .additionalMatrics(request.getAdditionalMatrics()).build();
 
         Activity savedActivity = activityRepository.save(activity);
+        try{
+            kafkaTemplate.send(topicName, savedActivity.getUserId(), savedActivity);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         System.out.println("test2:->>>>>>" + savedActivity);
         return mapToResponse(savedActivity);
