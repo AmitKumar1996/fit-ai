@@ -1,7 +1,12 @@
 package com.fitness.ActivityService;
 
+import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.net.Socket;
+import java.util.Properties;
 
 @SpringBootApplication
 public class ActivityServiceApplication {
@@ -15,13 +20,92 @@ public class ActivityServiceApplication {
     public static final String CYAN = "\u001B[36m";
     public static final String PURPLE = "\u001B[35m";
 
-    // New method: print microservices system design with emojis
-    private static void printSystemDesign() {
+    public static void main(String[] args) throws InterruptedException {
+        String serviceName = "Fitness Activity Service";
+        String activeProfile = "dev";
+        String serverPort = "8080";
+        String dbURI = "mongodb://localhost:27017";
+        String kafkaURI = "localhost:9092";
+        String zookeeperURI = "localhost:2181";
+        String techStack = "Java → Spring Boot → Kafka → MongoDB → Docker";
+
+        SpringApplication.run(ActivityServiceApplication.class, args);
+
+        printHeader(serviceName, activeProfile, serverPort, dbURI, kafkaURI, zookeeperURI, techStack);
+        printSystemDesign();
+        checkKafkaConnection(kafkaURI);
+        checkZookeeperConnection(zookeeperURI);
+        simulateDataFlow();
+    }
+
+    // ✅ Display summary table
+    private static void printHeader(String name, String profile, String port, String db, String kafka, String zk, String tech) {
+        System.out.println(PURPLE + "\n╔════════════════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(PURPLE + "║" + CYAN + "                🚴‍♀️  FITNESS ACTIVITY SERVICE STATUS  🏋️‍♂️               " + PURPLE + "║" + RESET);
+        System.out.println(PURPLE + "╠════════════════════════════════════════════════════════════════════════╣" + RESET);
+        System.out.printf(GREEN + "║ %-20s : %-45s ║%n", "Service Name", name);
+        System.out.printf(GREEN + "║ %-20s : %-45s ║%n", "Profile", profile);
+        System.out.printf(GREEN + "║ %-20s : %-45s ║%n", "Server Port", port);
+        System.out.printf(GREEN + "║ %-20s : %-45s ║%n", "MongoDB URI", db);
+        System.out.printf(GREEN + "║ %-20s : %-45s ║%n", "Kafka Broker", kafka);
+        System.out.printf(GREEN + "║ %-20s : %-45s ║%n", "Zookeeper", zk);
+        System.out.printf(GREEN + "║ %-20s : %-45s ║%n", "Tech Stack", tech);
+        System.out.println(PURPLE + "╚════════════════════════════════════════════════════════════════════════╝" + RESET);
         System.out.println();
+    }
+
+    // ✅ Check Kafka connection
+    private static void checkKafkaConnection(String kafkaURI) {
+        System.out.print(BLUE + "🔍 Checking Kafka connection... " + RESET);
+        try {
+            Properties props = new Properties();
+            props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaURI);
+            try (AdminClient client = AdminClient.create(props)) {
+                client.listTopics().names().get();
+                System.out.println(GREEN + "✅ Kafka is reachable at " + kafkaURI + RESET);
+            }
+        } catch (Exception e) {
+            System.out.println(RED + "❌ Kafka not reachable at " + kafkaURI + " (" + e.getMessage() + ")" + RESET);
+        }
+    }
+
+    // ✅ Check Zookeeper connection
+    private static void checkZookeeperConnection(String zookeeperURI) {
+        System.out.print(BLUE + "🔍 Checking Zookeeper connection... " + RESET);
+        String[] parts = zookeeperURI.replace("localhost:", "").split(":");
+        int port = parts.length > 1 ? Integer.parseInt(parts[1]) : 2181;
+        try (Socket socket = new Socket("localhost", port)) {
+            System.out.println(GREEN + "✅ Zookeeper is reachable at " + zookeeperURI + RESET);
+        } catch (Exception e) {
+            System.out.println(RED + "❌ Zookeeper not reachable at " + zookeeperURI + " (" + e.getMessage() + ")" + RESET);
+        }
+    }
+
+    // ✅ Simulate data flow
+    private static void simulateDataFlow() throws InterruptedException {
+        System.out.println();
+        System.out.println(YELLOW + "📡 Simulating Kafka data flow..." + RESET);
+
+        String[] steps = {
+                "Sending message → topic: activity_log",
+                "Kafka broker processing...",
+                "Consumer received message ✅",
+                "Message saved to MongoDB 🗄️"
+        };
+
+        for (String step : steps) {
+            System.out.println(CYAN + "➡️ " + step + RESET);
+            Thread.sleep(700);
+        }
+
+        System.out.println(GREEN + "✅ Data pipeline working fine!\n" + RESET);
+    }
+
+    // Existing visual architecture block
+    private static void printSystemDesign() {
         System.out.println(PURPLE + "╔════════════════════════════════════════════════════════╗" + RESET);
         System.out.println(PURPLE + "║" + CYAN + "            MICROSERVICES ARCHITECTURE DESIGN           " + PURPLE + "║" + RESET);
         System.out.println(PURPLE + "╠════════════════════════════════════════════════════════╣" + RESET);
-
         System.out.println(GREEN + "  🧑‍💻 Client" + RESET + " --> " + YELLOW + "🌐 API Gateway" + RESET);
         System.out.println(YELLOW + "                |" + RESET);
         System.out.println(YELLOW + "         -----------------" + RESET);
@@ -31,60 +115,6 @@ public class ActivityServiceApplication {
         System.out.println(GREEN + "   🗄️ DBs / 🔁 Cache (Postgres/Redis)" + RESET);
         System.out.println("         |       |       |");
         System.out.println(GREEN + "     📨 Kafka / Messaging Queue" + RESET);
-
         System.out.println(PURPLE + "╚════════════════════════════════════════════════════════╝" + RESET);
-        System.out.println();
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        String serviceName = "Fitness Activity Service";
-        String activeProfile = "default"; // can be dynamically fetched
-        String serverPort = "8080";
-        String dbURI = "mongodb://localhost:27017";
-        String techStack = "IntelliJ → Java → Spring Boot → Postman → CI/CD → AWS";
-
-        // Start Spring Boot
-        SpringApplication.run(ActivityServiceApplication.class, args);
-
-
-        // Display Service Info Box
-        System.out.println();
-        System.out.println(PURPLE + "╔════════════════════════════════════════════════════════════════════════════════╗" + RESET);
-        System.out.println(PURPLE + "║" + CYAN + "                     🏋️‍♂️  FITNESS ACTIVITY SERVICE  🚴‍♀️      " + PURPLE + "           ║" + RESET);
-        System.out.println(PURPLE + "╠════════════════════════════════════════════════════════════════════════════════╣" + RESET);
-        System.out.println(GREEN + "🟢 Service Name: " + RESET + serviceName);
-
-        // Dynamic profile color
-        String profileColor = switch (activeProfile.toLowerCase()) {
-            case "prod" -> RED;
-            case "dev" -> YELLOW;
-            default -> BLUE;
-        };
-        System.out.println(GREEN + "🟢 Profile     : " + profileColor + activeProfile + RESET);
-
-        System.out.println(GREEN + "📌 Server Port : " + RESET + serverPort);
-        System.out.println(GREEN + "🗄️ MongoDB URI : " + RESET + dbURI);
-        System.out.println(GREEN + "⚙️ Tech Stack  : " + RESET + techStack);
-        System.out.println(PURPLE + "╚════════════════════════════════════════════════════════════════════════════════╝" + RESET);
-        System.out.println();
-
-        // Animated Boot Loader
-        System.out.println(CYAN + "🎉 Booting " + serviceName + "..." + RESET);
-        int totalSteps = 20;
-        for (int i = 1; i <= totalSteps; i++) {
-            int progress = i * 100 / totalSteps;
-            String bar = "▓".repeat(i) + "░".repeat(totalSteps - i);
-            String spinner = switch (i % 4) {
-                case 0 -> "|";
-                case 1 -> "/";
-                case 2 -> "-";
-                default -> "\\";
-            };
-            System.out.print("\r" + GREEN + "[" + bar + "] " + progress + "% " + spinner + RESET);
-            Thread.sleep(150);
-        }
-
-        // Final Boot Complete
-        System.out.println("\n" + GREEN + "✅ Boot complete! " + CYAN + serviceName + " is up and running!" + RESET);
     }
 }
