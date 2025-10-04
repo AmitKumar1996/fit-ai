@@ -9,6 +9,23 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/airecommendationfitness  # MongoDB connection URI
       database: airecommendationfitness
+  # Kafka Configuration
+  kafka:
+    bootstrap-servers: localhost:9092  # Kafka broker address (host:port)
+    consumer:
+      group-id: activity-processor-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # Serializer class for Kafka message keys (case-sensitive!)
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      # Serializer class for Kafka message values (JSON)
+      spring.json.use.type.headers: false
+      spring.json.value.default.type: com.fitness.ActivityService.model.Activity
+      spring.json.trusted.packages: "*"
+
+# Kafka topic configuration
+kafka:
+  topic:
+    name: activity-events  # Topic where activity events are published
 
 eureka:
   client:
