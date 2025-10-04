@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class ActivityMessageListener {
     @KafkaListener(topics = "${kafka.topic.name}", groupId = "activity-processor-group")
     public void processActivity(Activity activity) {
-        log.info("Received Activity for processing");
+        log.info("Received Activity for processing: {}", activity.getUserId());
     }
 
 }
