@@ -2,7 +2,8 @@ package com.fitness.aiService.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import model.Activity;
+import com.fitness.ActivityService.model.Activity;  // ✅ Corrected import
+
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 public class ActivityMessageListener {
+
     @KafkaListener(topics = "${kafka.topic.name}", groupId = "activity-processor-group")
     public void processActivity(Activity activity) {
         log.info("Received Activity for processing: {}", activity.getUserId());
     }
-
 }

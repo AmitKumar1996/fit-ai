@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api/recommendations")
 public class RecommendationController {
 
-    private final RecommendationService recommendationService; // no @Autowired
+    private RecommendationService recommendationService; // no @Autowired
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Recommendation>> getUserRecommendation(@PathVariable String userId) {

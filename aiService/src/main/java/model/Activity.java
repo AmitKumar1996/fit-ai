@@ -1,10 +1,10 @@
-package model;
-
+package com.fitness.ActivityService.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import model.ActivityType;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -12,15 +12,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-
-//In JPA / Hibernate → we use @Entity to tell the ORM: “this class is a database entity, map it to a table.
-
-//In Spring Data MongoDB → we use @Document to tell Spring: “this class is a MongoDB document, map it to a collection.
-
-//@Document(collation ="ai-fit")
-
 @Data
-@Builder        //  a chainable, flexible, human-friendly object creator.
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Activity {
@@ -29,19 +22,16 @@ public class Activity {
     private String userId;
     private ActivityType type;
     private Integer duration;
-    private LocalDateTime starTime;
+    private LocalDateTime startTime;
 
     private Integer caloriesBurned;
 
     @Field("matrics")
     private Map<String, Object> additionalMatrics;
+
     @LastModifiedDate
-    private LocalDateTime upadatedAt;
+    private LocalDateTime updatedAt;
 
     @CreatedDate
     private LocalDateTime createdAt;
-
-
 }
-
-
