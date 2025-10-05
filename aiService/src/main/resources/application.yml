@@ -9,6 +9,8 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/airecommendationfitness  # MongoDB connection URI
       database: airecommendationfitness
+
+
   # Kafka Configuration
   kafka:
     bootstrap-servers: localhost:9092  # Kafka broker address (host:port)

@@ -17,6 +17,12 @@ spring:
 
   # Kafka Configuration
   kafka:
+    consumer:
+      properties:
+        spring:
+          json:
+            trusted:
+              packages=*:
     bootstrap-servers: localhost:9092  # Kafka broker address (host:port)
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
