@@ -1,4 +1,4 @@
-package model;
+package com.fitness.aiService.model;
 
 import lombok.Builder;
 import lombok.Data;

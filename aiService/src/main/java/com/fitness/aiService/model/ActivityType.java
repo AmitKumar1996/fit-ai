@@ -1,4 +1,4 @@
-package model;
+package com.fitness.aiService.model;
 
 public enum ActivityType {
 
