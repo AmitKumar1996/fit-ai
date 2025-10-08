@@ -22,14 +22,13 @@ spring:
       enable-auto-commit: true  # Enable automatic offset commits
       properties:
         spring.json.use.type.headers: false  # Disable type headers in Kafka messages
-        spring.json.value.default.type: com.fitness.ActivityService.model.Activity  # Default class for deserializing JSON messages
+        spring.json.value.default.type: com.fitness.aiService.model.Activity  # ✅ FIXED: Corrected package name for Activity class
         spring.json.trusted.packages: "*"  # Trust all packages for deserialization
+
 gemini:
   api:
     url: ${GEMINI_URL}
     key: ${GEMINI_KEY}
-
-
 
 # Kafka topic configuration (separate block for clarity)
 kafka:
