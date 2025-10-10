@@ -5,12 +5,14 @@ import com.futness.userService.dto.UserResponse;
 import com.futness.userService.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/users")
 @RestController
 @AllArgsConstructor
+@Slf4j
 public class UserController {
 
     private UserService userService;
@@ -22,6 +24,8 @@ public class UserController {
 
     @GetMapping("/{userId}/validate")
     public ResponseEntity<Boolean> validateUser(@PathVariable String userId){
+        // System.out.println("User Id"+""+userId);
+        log.info("User Id {}", userId);
         return ResponseEntity.ok(userService.existByUserId (userId));
     }
 

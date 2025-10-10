@@ -189,3 +189,192 @@ Kafka producer message bhejega → topic me jayega
 Kafka consumer message read karega → DB me save ho jayega
 
 ✅ End-to-End flow ready: API → Kafka → DB
+
+
+🛠️ 5. DOCKER COMMANDS — FULL REFERENCE
+--------------------------------------
+
+📦 Start Kafka + Zookeeper (in background):
+  docker-compose up -d
+  → Creates and starts containers defined in docker-compose.yml
+
+🧹 Stop and remove all containers (clean shutdown):
+  docker-compose down
+  → Stops containers and removes them from memory
+
+🛑 Stop only running containers (keep them created):
+  docker stop zookeeper kafka
+  → Stops the containers but does not delete them
+
+🟢 Start already created containers:
+  docker start zookeeper kafka
+  → Starts containers that were previously stopped
+
+🔍 Check running containers:
+  docker ps
+  → Shows only currently running containers
+
+🔎 Check all containers (running + stopped):
+  docker ps -a
+  → Useful for finding old or exited containers
+
+🧨 Remove conflicting container (if name already in use):
+  docker rm -f zookeeper
+  docker rm -f kafka
+  → Forcefully deletes container by name
+
+📥 Pull Kafka and Zookeeper images manually (optional):
+  docker pull confluentinc/cp-zookeeper:latest
+  docker pull confluentinc/cp-kafka:latest
+  → Downloads images from Docker Hub
+
+🧱 Build custom image from Dockerfile:
+  docker build -t my-kafka-app .
+  → Builds image from current directory using Dockerfile
+
+🚀 Run custom container from image:
+  docker run -d --name my-kafka-container -p 8080:8080 my-kafka-app
+  → Starts container from your custom image
+
+🧹 Clean up stopped containers:
+  docker container prune
+  → Removes all stopped containers
+
+🧹 Clean up unused images:
+  docker image prune
+  → Removes dangling images
+
+🧹 Clean everything (containers + images + volumes):
+  docker system prune -a
+  → Full cleanup (use with caution)
+
+📂 Open docker-compose.yml for editing:
+  nano docker-compose.yml
+  → Edit your Kafka + Zookeeper setup
+
+🧠 Tip: Always check for duplicate keys in YAML
+  → Only one `version:` and one `services:` block allowed
+
+
+==============================
+🛠️ Kafka + Docker Setup Guide (Full Reference)
+==============================
+
+📁 1. Navigate to Kafka Docker Directory
+----------------------------------------
+Go to your Kafka setup folder:
+  cd ~/kafka-docker
+
+If folder doesn't exist, clone it:
+  git clone https://github.com/wurstmeister/kafka-docker.git
+  cd kafka-docker
+
+📝 2. Open docker-compose.yml for Editing
+----------------------------------------
+Open file in terminal:
+  nano docker-compose.yml
+
+Make sure it has only ONE `version:` and ONE `services:` block.
+
+✅ Example Structure:
+---------------------
+version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+💡 3. Pull Docker Images (Only Once)
+----------------------------------------
+Docker will auto-pull images when you run `docker-compose up` for the first time.
+
+To manually pull:
+  docker pull confluentinc/cp-zookeeper:latest
+  docker pull confluentinc/cp-kafka:latest
+
+📦 4. Create and Start Containers
+----------------------------------------
+Start containers in background:
+  docker-compose up -d
+
+🛑 5. Stop and Remove Containers
+----------------------------------------
+Stop and delete containers:
+  docker-compose down
+
+🟡 6. Stop Containers Only (Keep Created)
+----------------------------------------
+Stop running containers:
+  docker stop zookeeper kafka
+
+🟢 7. Start Existing Containers
+----------------------------------------
+Start already created containers:
+  docker start zookeeper kafka
+
+🔍 8. Check Running Containers
+----------------------------------------
+List running containers:
+  docker ps
+
+List all containers (including stopped):
+  docker ps -a
+
+🧹 9. Remove Conflicting Containers
+----------------------------------------
+If error: "Container name already in use"
+
+Run:
+  docker rm -f zookeeper
+  docker rm -f kafka
+
+🧱 10. Build Custom Docker Image (Optional)
+----------------------------------------
+If you want to build your own image:
+
+Create Dockerfile:
+  nano Dockerfile
+
+Example:
+  FROM openjdk:21
+  COPY . /app
+  WORKDIR /app
+  RUN ./mvnw clean install
+  CMD ["java", "-jar", "target/your-app.jar"]
+
+Build image:
+  docker build -t my-kafka-app .
+
+Run container:
+  docker run -d --name my-kafka-container -p 8080:8080 my-kafka-app
+
+🧠 11. Common Docker Cleanup Commands
+----------------------------------------
+Remove all stopped containers:
+  docker container prune
+
+Remove unused images:
+  docker image prune
+
+Remove everything (containers + images + volumes):
+  docker system prune -a
+
+==============================
+✅ End of Guide
+==============================
+

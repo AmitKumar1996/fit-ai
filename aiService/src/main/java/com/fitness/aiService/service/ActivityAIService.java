@@ -1,7 +1,10 @@
 package com.fitness.aiService.service;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fitness.aiService.model.Activity;
+import com.fitness.aiService.model.Recommendation;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +19,32 @@ public class ActivityAIService {
 
 private final GeminiService geminiService;
 
-public void genrateRecommendation(Activity activity){
+public Recommendation genrateRecommendation(Activity activity){
     String   prompt = createPromptForActivity(activity);
+    String aiResponse= geminiService.getRecommendations(prompt);
+    log.info("RESPONSE FROM AI {} ",aiResponse);
+
+    return processAIResponse(activity, aiResponse);
 
     // ✅ Colorful log with ANSI escape codes
-    log.info("\u001B[36mRESPONSE FROM AI: {}\u001B[0m", geminiService.getRecommendations(prompt));
+  //  log.info("\u001B[36mRESPONSE FROM AI: {}\u001B[0m", geminiService.getRecommendations(prompt));
 
 }
+
+    private Recommendation processAIResponse(Activity activity, String aiResponse) {
+    try {
+        ObjectMapper mapper=new ObjectMapper();
+        JsonNode rootNode=mapper.readTree(aiResponse);
+        JsonNode textNode=rootNode.path("candidates")
+                .get(0)
+                .path("parts")
+                .get(0)
+                .path("text");
+    }
+    catch (Exception e){
+
+    }
+    x}
 
     private String createPromptForActivity(Activity activity) {
 
