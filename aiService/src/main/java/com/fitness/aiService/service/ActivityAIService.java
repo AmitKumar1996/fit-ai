@@ -21,7 +21,7 @@ private final GeminiService geminiService;
 public Recommendation genrateRecommendation(Activity activity){
     String   prompt = createPromptForActivity(activity);
     String aiResponse= geminiService.getRecommendations(prompt);
-    log.info("RESPONSE FROM AI {} ",aiResponse);
+    log.info("RESPONSE FROM AI {} ", aiResponse);
 
     return processAIResponse(activity, aiResponse);
 
@@ -39,11 +39,20 @@ public Recommendation genrateRecommendation(Activity activity){
                 .path("parts")
                 .get(0)
                 .path("text");
+
+        String jsonContent=textNode.asText()
+                .replaceAll("```json\\n", "")
+                .replaceAll("\\n```","")
+                .trim();
+
+        log.info("RESPONSE FROM CLEANED AI {} ", jsonContent);
     }
-    catch (Exception e){
+    catch (Exception e) {
 
     }
-    x}
+    return  null;
+}
+
 
     private String createPromptForActivity(Activity activity) {
 
