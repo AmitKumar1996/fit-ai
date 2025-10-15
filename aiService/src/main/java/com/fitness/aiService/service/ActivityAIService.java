@@ -95,7 +95,7 @@ public Recommendation genrateRecommendation(Activity activity){
                 .type(activity.getType().toString())
                 .recommendation("unable to genrate detailed analysis")
                 .improvements(Collections.singletonList("Continue with your current routine"))
-                .suggestions(Collections.singletonList("Consider ")
+                .suggestions(Collections.singletonList("Consider "))
                 .safety(Arrays.asList(
                         "Always warm up before exercise",
                         "stay hydrated",
