@@ -23,70 +23,77 @@ import java.util.List;
 public class ActivityAIService {
 
 
-private final GeminiService geminiService;
+    private final GeminiService geminiService;
 
-public Recommendation genrateRecommendation(Activity activity){
-    String   prompt = createPromptForActivity(activity);
-    String aiResponse= geminiService.getRecommendations(prompt);
-    log.info("RESPONSE FROM AI {} ", aiResponse);
+    public Recommendation genrateRecommendation(Activity activity) {
+        String prompt = createPromptForActivity(activity);
+        String aiResponse = geminiService.getRecommendations(prompt);
+        log.info("RESPONSE FROM AI {} ", aiResponse);
 
-    return processAIResponse(activity, aiResponse);
+        return processAIResponse(activity, aiResponse);
 
-    // ✅ Colorful log with ANSI escape codes
-  //  log.info("\u001B[36mRESPONSE FROM AI: {}\u001B[0m", geminiService.getRecommendations(prompt));
+        // ✅ Colorful log with ANSI escape codes
+        //  log.info("\u001B[36mRESPONSE FROM AI: {}\u001B[0m", geminiService.getRecommendations(prompt));
 
-}
-
+    }
     private Recommendation processAIResponse(Activity activity, String aiResponse) {
-    try {
-        ObjectMapper mapper=new ObjectMapper();
-        JsonNode rootNode=mapper.readTree(aiResponse);
-        JsonNode textNode=rootNode.path("candidates")
-                .get(0)
-                .path("parts")
-                .get(0)
-                .path("text");
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(aiResponse);
 
-        String jsonContent=textNode.asText()
-                .replaceAll("```json\\n", "")
-                .replaceAll("\\n```","")
-                .trim();
+            JsonNode candidatesNode = rootNode.path("candidates");
+            if (!candidatesNode.isArray() || candidatesNode.size() == 0) {
+                return createDefaultRecomme(activity);
+            }
 
-        log.info("RESPONSE FROM CLEANED AI {} ", jsonContent);
-        JsonNode analysisJson=mapper.readTree(jsonContent);
-        JsonNode analysisNode=analysisJson.path("analysis");
-        StringBuilder fullAnalysis=new StringBuilder();
+            JsonNode contentNode = candidatesNode.get(0).path("content");
+            if (contentNode.isMissingNode()) {
+                return createDefaultRecomme(activity);
+            }
 
-        addAnalysisSection(fullAnalysis, analysisNode,"overall","Overall:");
-        addAnalysisSection(fullAnalysis, analysisNode,"pace","pace:");
-        addAnalysisSection(fullAnalysis, analysisNode,"heartRate","Heart Rate");
-        addAnalysisSection(fullAnalysis, analysisNode,"caloriesBurned","Calories:");
+            JsonNode partsNode = contentNode.path("parts");
+            if (!partsNode.isArray() || partsNode.size() == 0) {
+                return createDefaultRecomme(activity);
+            }
 
-        List<String> improvements= extractImprovements(analysisJson.path("improvements"));
-        List<String> suggestions= extractSuggestions(analysisJson.path("suggestions"));
-        List<String> safety= extractSaftyGuidelines(analysisJson.path("safety"));
+            JsonNode textNode = partsNode.get(0).path("text");
+            String jsonContent = textNode.asText()
+                    .replaceAll("```json\\n", "")
+                    .replaceAll("\\n```", "")
+                    .trim();
 
-        return Recommendation.builder()
-                .activityId(activity.getId())
-                .userId(activity.getUserId())
-                .type(activity.getType().toString())
-                .recommendation(fullAnalysis.toString().trim())
-                .improvements(improvements)
-                .suggestions(suggestions)
-                .safety(safety)
-                .createdAt(LocalDateTime.now())
-                .build();
+            log.info("RESPONSE FROM CLEANED AI {} ", jsonContent);
+            JsonNode analysisJson = mapper.readTree(jsonContent);
+            JsonNode analysisNode = analysisJson.path("analysis");
 
+            StringBuilder fullAnalysis = new StringBuilder();
 
+            addAnalysisSection(fullAnalysis, analysisNode,"overall","Overall:");
+            addAnalysisSection(fullAnalysis, analysisNode,"pace","pace:");
+            addAnalysisSection(fullAnalysis, analysisNode,"heartRate","Heart Rate:");
+            addAnalysisSection(fullAnalysis, analysisNode,"caloriesBurned","Calories:");
 
+            List<String> improvements = extractImprovements(analysisJson.path("improvements"));
+            List<String> suggestions = extractSuggestions(analysisJson.path("suggestions"));
+            List<String> safety = extractSaftyGuidelines(analysisJson.path("safety"));
+
+            return Recommendation.builder()
+                    .activityId(activity.getId())
+                    .userId(activity.getUserId())
+                    .type(activity.getType().toString())
+                    .recommendation(fullAnalysis.toString().trim())
+                    .improvements(improvements)
+                    .suggestions(suggestions)
+                    .safety(safety)
+                    .createdAt(LocalDateTime.now())
+                    .build();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return createDefaultRecomme(activity);
+        }
     }
-    catch (Exception e) {
-        e.printStackTrace();
-        return createDefaultRecomme(activity);
 
-    }
-
-}
 
     private Recommendation createDefaultRecomme(Activity activity) {
         return Recommendation.builder()
