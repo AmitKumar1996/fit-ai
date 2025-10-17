@@ -1,0 +1,40 @@
+# ================================
+# User Service Configuration
+# ================================
+
+server:
+  port: 8084  # Unique port for this microservice
+
+spring:
+  application:
+    name: userService  # Unique service name registered in Eureka
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fitness-micro-user  # PostgreSQL DB URL
+    username: postgres
+    password: "Developer@123"
+  jpa:
+    hibernate:
+      ddl-auto: update  # Auto-update DB schema
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info  # Expose health & info endpoints for monitoring
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/  # Eureka server URL
+    register-with-eureka: true  # This service registers itself
+    fetch-registry: true        # Fetch info about other services
+
+  instance:
+    lease-renewal-interval-in-seconds: 10  # Heartbeat interval
+    lease-expiration-duration-in-seconds: 30  # When to consider service DOWN
+
