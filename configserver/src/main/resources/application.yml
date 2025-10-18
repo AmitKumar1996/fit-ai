@@ -1,12 +1,28 @@
 spring:
-application:
-  name: configserver
+  application:
+    name: configserver
 
-profiles:
-  active: native
+  profiles:
+    # Use 'native' for local config files inside /resources/config
+    # Use 'git' when fetching config from a Git repository
+    active: native
 
-cloud:
-  config:
-    server:
-      native:
-        search-location:  classpath:/config
+  cloud:
+    config:
+      server:
+        # ---------- Native profile (local config files) ----------
+        native:
+          # Folder containing your configuration files
+          search-locations: classpath:/config
+
+        # ---------- Git profile (remote repository) ----------
+        git:
+          uri: https://github.com/AmitKumar1996/fit-ai-config-repo
+          clone-on-start: true
+          # Optional settings for Git repo access
+          # username: your-github-username
+          # password: your-personal-access-token
+          # search-paths: config
+
+server:
+  port: 8090

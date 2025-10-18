@@ -8,28 +8,20 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ActivityService" />
+        <module name="configserver" />
         <module name="eureka-server" />
         <module name="eureka" />
         <module name="fitness-service" />
       </profile>
-      <profile name="Annotation profile for userService" enabled="true">
+      <profile name="Annotation profile for user-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath>
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="userService" />
-      </profile>
-      <profile name="Annotation profile for aiService" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath>
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="aiService" />
+        <module name="userService" />
       </profile>
     </annotationProcessing>
   </component>
@@ -37,6 +29,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ActivityService" options="-parameters" />
       <module name="aiService" options="-parameters" />
+      <module name="configserver" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="fitness-service" options="-parameters" />

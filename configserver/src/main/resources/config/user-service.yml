@@ -6,8 +6,8 @@ server:
   port: 8084  # Unique port for this microservice
 
 spring:
-  application:
-    name: userService  # Unique service name registered in Eureka
+  #  application:
+  #    name: user-Service  # Unique service name registered in Eureka
 
   datasource:
     url: jdbc:postgresql://localhost:5432/fitness-micro-user  # PostgreSQL DB URL
@@ -37,4 +37,3 @@ eureka:
   instance:
     lease-renewal-interval-in-seconds: 10  # Heartbeat interval
     lease-expiration-duration-in-seconds: 30  # When to consider service DOWN
-
