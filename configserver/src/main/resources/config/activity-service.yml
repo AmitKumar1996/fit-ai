@@ -1,0 +1,58 @@
+# ================================
+# Activity Service Configuration
+# ================================
+
+server:
+  port: 8085  # Unique port for this microservice to avoid conflict with other services
+
+spring:
+  application:
+    name: activity-service  # Unique service name registered with Eureka
+
+  # MongoDB Configuration
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/fitnessDB  # MongoDB connection URI
+      database: fitnessDB  # MongoDB database name used by this microservice
+
+  # Kafka Configuration
+  kafka:
+    consumer:
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+    bootstrap-servers: localhost:9092  # Kafka broker address
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+# Kafka topic configuration
+kafka:
+  topic:
+    name: activity-events  # Topic where activity events are published
+
+# Eureka Discovery Client Configuration
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/  # Eureka server URL
+    register-with-eureka: true
+    fetch-registry: true
+
+  # Eureka Instance specific configuration
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+
+# ================================
+# Notes / Troubleshooting
+# ================================
+# 1. Ensure Kafka is running on localhost:9092 and Zookeeper on 2181 before starting the service.
+# 2. Kafka serializer class names are case-sensitive:
+#    - key-serializer: StringSerializer
+#    - value-serializer: JsonSerializer
+# 3. MongoDB must be running and accessible at the URI specified.
+# 4. Eureka server must be running on localhost:8761 before starting this service.
+# 5. Adjust 'server.port' if you run multiple microservices locally to avoid port conflicts.
