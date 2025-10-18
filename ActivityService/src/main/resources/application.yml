@@ -1,5 +1,5 @@
 # ================================
-# Activity Service Configuration
+# Activity Service Configuration (Using Config Server)
 # ================================
 
 server:
@@ -7,54 +7,57 @@ server:
 
 spring:
   application:
-    name: ActivityService  # Unique service name registered with Eureka for discovery
+    name: activity-service  # Unique service name
 
-  # MongoDB Configuration
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/fitnessDB  # MongoDB connection URI
-      database: fitnessDB  # MongoDB database name used by this microservice
+  # Import configuration from Config Server
+  config:
+    import: optional:configserver:http://localhost:8090  # ConfigServer URL (update to match your running port)
+    profiles:
+      active: default
 
-  # Kafka Configuration
-  kafka:
-    consumer:
-      properties:
-        spring:
-          json:
-            trusted:
-              packages=*:
-    bootstrap-servers: localhost:9092  # Kafka broker address (host:port)
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      # Serializer class for Kafka message keys (case-sensitive!)
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      # Serializer class for Kafka message values (JSON)
-
-# Kafka topic configuration
 kafka:
   topic:
-    name: activity-events  # Topic where activity events are published
+    name: activity-events
 
-# Eureka Discovery Client Configuration
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/  # Eureka server URL
-    register-with-eureka: true  # This service registers itself with Eureka
-    fetch-registry: true        # Fetch info about other registered services
 
-  # Eureka Instance specific configuration
-  instance:
-    lease-renewal-interval-in-seconds: 10  # Frequency of heartbeats sent to Eureka (default 30s)
-    lease-expiration-duration-in-seconds: 30  # Time to consider service DOWN if no heartbeat (default 90s)
+
 
 # ================================
 # Notes / Troubleshooting
 # ================================
-# 1. Ensure Kafka is running on localhost:9092 and Zookeeper on 2181 before starting the service.
-# 2. The Kafka serializer class names are case-sensitive:
-#    - key-serializer: StringSerializer (uppercase 'S')
-#    - value-serializer: JsonSerializer (uppercase 'J' and 'S')
-# 3. MongoDB must be running and accessible at the URI specified.
-# 4. Eureka server must be running on localhost:8761 before starting this service.
-# 5. Adjust 'server.port' if you run multiple microservices locally to avoid port conflicts.
+# 1. Ensure the Config Server is running on http://localhost:8090 before starting this service.
+# 2. If you need to run locally without Config Server, uncomment the sections below:
+#
+# spring:
+#   data:
+#     mongodb:
+#       uri: mongodb://localhost:27017/fitnessDB
+#       database: fitnessDB
+#
+#   kafka:
+#     consumer:
+#       properties:
+#         spring:
+#           json:
+#             trusted:
+#               packages=*
+#     bootstrap-servers: localhost:9092
+#     producer:
+#       key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#
+# kafka:
+#   topic:
+#     name: activity-events
+#
+# eureka:
+#   client:
+#     serviceUrl:
+#       defaultZone: http://localhost:8761/eureka/
+#     register-with-eureka: true
+#     fetch-registry: true
+#   instance:
+#     lease-renewal-interval-in-seconds: 10
+#     lease-expiration-duration-in-seconds: 30
+#
+# 3. Adjust 'server.port' if you run multiple microservices locally to avoid port conflicts.

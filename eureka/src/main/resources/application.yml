@@ -5,14 +5,23 @@
 server:
   port: 8761  # Eureka dashboard default port
 
-spring:
-  application:
-    name: eureka-server  # Name of this service in Spring Cloud ecosystem
 
-eureka:
-  client:
-    register-with-eureka: false   # This server does NOT register itself with another Eureka
-    fetch-registry: false         # No need to fetch registry for standalone Eureka server
-  server:
-    wait-time-in-ms-when-sync-empty: 0  # Helps dashboard start quickly
-    # Optional: Adjust if you want Eureka to sync faster or wait less
+spring:
+  config:
+    import: optional:configserver:http://localhost:8090  # ConfigServer URL
+    profiles:
+      active: default
+
+
+
+#spring:
+#  application:
+#    name: eureka-server  # Name of this service in Spring Cloud ecosystem
+#
+#eureka:
+#  client:
+#    register-with-eureka: false   # This server does NOT register itself with another Eureka
+#    fetch-registry: false         # No need to fetch registry for standalone Eureka server
+#  server:
+#    wait-time-in-ms-when-sync-empty: 0  # Helps dashboard start quickly
+#    # Optional: Adjust if you want Eureka to sync faster or wait less

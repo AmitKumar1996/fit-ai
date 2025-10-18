@@ -1,48 +1,59 @@
-# Server configuration
+# ================================
+# Server configuration (via Config Server)
+# ================================
 server:
   port: 8086  # Port on which the application will run
 
-# Spring Boot application configuration
 spring:
   application:
-    name: aiService  # Unique service name registered in Eureka
+    name: ai-service  # Unique service name registered in Eureka
+  config:
+    import: optional:configserver:http://localhost:8090  # ConfigServer URL
+    profiles:
+      active: default
 
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/airecommendationfitness  # MongoDB connection URI with database name
-      database: airecommendationfitness  # Explicit database name
-
-  kafka:
-    bootstrap-servers: localhost:9092  # Kafka broker address (host:port)
-    consumer:
-      group-id: activity-processor-group  # Kafka consumer group ID
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer  # Deserializer for message keys
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer  # Deserializer for message values (JSON)
-      auto-offset-reset: latest  # Start from latest offset if no committed offset is found
-      enable-auto-commit: true  # Enable automatic offset commits
-      properties:
-        spring.json.use.type.headers: false  # Disable type headers in Kafka messages
-        spring.json.value.default.type: com.fitness.aiService.model.Activity  # ✅ FIXED: Corrected package name for Activity class
-        spring.json.trusted.packages: "*"  # Trust all packages for deserialization
-
-gemini:
-  api:
-    url: ${GEMINI_URL}
-    key: ${GEMINI_KEY}
-
-# Kafka topic configuration (separate block for clarity)
-kafka:
-  topic:
-    name: activity-events  # Topic where activity events are published
-
-# Eureka client configuration for service registration and discovery
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/  # Eureka server URL
-    register-with-eureka: true   # Enable registration with Eureka
-    fetch-registry: true         # Enable fetching registry information from Eureka
-
-  instance:
-    lease-renewal-interval-in-seconds: 10   # Frequency of heartbeats sent to Eureka (default is 30 seconds)
-    lease-expiration-duration-in-seconds: 30  # Time after which Eureka considers the service DOWN (default is 90 seconds)
+#
+## Spring Boot application configuration
+#spring:
+#  application:
+#    name: aiService  # Unique service name registered in Eureka
+#
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/airecommendationfitness  # MongoDB connection URI with database name
+#      database: airecommendationfitness  # Explicit database name
+#
+#  kafka:
+#    bootstrap-servers: localhost:9092  # Kafka broker address (host:port)
+#    consumer:
+#      group-id: activity-processor-group  # Kafka consumer group ID
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer  # Deserializer for message keys
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer  # Deserializer for message values (JSON)
+#      auto-offset-reset: latest  # Start from latest offset if no committed offset is found
+#      enable-auto-commit: true  # Enable automatic offset commits
+#      properties:
+#        spring.json.use.type.headers: false  # Disable type headers in Kafka messages
+#        spring.json.value.default.type: com.fitness.aiService.model.Activity  # ✅ FIXED: Corrected package name for Activity class
+#        spring.json.trusted.packages: "*"  # Trust all packages for deserialization
+#
+#gemini:
+#  api:
+#    url: ${GEMINI_URL}
+#    key: ${GEMINI_KEY}
+#
+## Kafka topic configuration (separate block for clarity)
+#kafka:
+#  topic:
+#    name: activity-events  # Topic where activity events are published
+#
+## Eureka client configuration for service registration and discovery
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/  # Eureka server URL
+#    register-with-eureka: true   # Enable registration with Eureka
+#    fetch-registry: true         # Enable fetching registry information from Eureka
+#
+#  instance:
+#    lease-renewal-interval-in-seconds: 10   # Frequency of heartbeats sent to Eureka (default is 30 seconds)
+#    lease-expiration-duration-in-seconds: 30  # Time after which Eureka considers the service DOWN (default is 90 seconds)
