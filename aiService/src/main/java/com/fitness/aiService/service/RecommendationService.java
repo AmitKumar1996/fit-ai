@@ -13,7 +13,8 @@ import java.util.List;
 public class RecommendationService {
 
     @Autowired
-    private final RecommendationRepository recommendationRepository;
+    private final RecommendationRepository
+            recommendationRepository;
 
 
     public List<Recommendation> getUserRecommendation(String userId) {

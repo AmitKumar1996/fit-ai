@@ -3,6 +3,7 @@ package com.fitness.aiService.controller;
 import com.fitness.aiService.service.RecommendationService;
 import lombok.RequiredArgsConstructor;
 import com.fitness.aiService.model.Recommendation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +15,16 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/recommendations")
-public class RecommendationController {
 
+public class RecommendationController {
+    @Autowired
     private RecommendationService recommendationService; // no @Autowired
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Recommendation>> getUserRecommendation(@PathVariable String userId) {
+
+        System.out.println(userId);
+
         return ResponseEntity.ok(recommendationService.getUserRecommendation(userId));
     }
 
