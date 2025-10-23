@@ -1,0 +1,53 @@
+#server:
+#  port: 8092
+#
+
+#
+
+
+
+spring:
+  # application:
+  #   name: gateway-service
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            # ✅ USER-SERVICE
+            - id: user-service
+              uri: lb://USER-SERVICE      # Use Eureka service name
+              predicates:
+                - Path=/api/users/**
+
+            # ✅ AI-SERVICE
+            - id: ai-service
+              uri: lb://AI-SERVICE
+              predicates:
+                  - Path=/api/recommendations/**
+
+            # ✅ ACTIVITY-SERVICE
+            - id: activity-service
+              uri: lb://ACTIVITY-SERVICE
+              predicates:
+                - Path=/api/activities/**
+
+            # ✅ CONFIGSERVER (optional)
+            # - id: configserver
+            #   uri: lb://CONFIGSERVER
+            #   predicates:
+            #     - Path=/api/config/**
+
+# Optional: Eureka settings
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+      register-with-eureka: true      # change to true if services register themselves
+      fetch-registry: true
+server:
+  port: 8080
+
+
+

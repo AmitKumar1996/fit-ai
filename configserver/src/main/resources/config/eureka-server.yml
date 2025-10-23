@@ -13,6 +13,9 @@ eureka:
   client:
     register-with-eureka: false   # This server does NOT register itself with another Eureka
     fetch-registry: false         # No need to fetch registry for standalone Eureka server
+
   server:
     wait-time-in-ms-when-sync-empty: 0  # Helps dashboard start quickly
-    # Optional: Adjust if you want Eureka to sync faster or wait less
+
+  instance:
+    hostname: localhost  # ✅ moved under 'eureka', not 'server'

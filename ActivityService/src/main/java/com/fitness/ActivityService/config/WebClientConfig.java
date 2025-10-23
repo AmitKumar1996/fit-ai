@@ -37,7 +37,7 @@ public class WebClientConfig {
     @Bean
     public WebClient userServiceWebClient(WebClient.Builder webClientBuilder) {
         return webClientBuilder
-                .baseUrl("http://USERSERVICE") // USERSERVICE is the application name registered in Eureka
+                .baseUrl("http://USER-SERVICE") // USERSERVICE is the application name registered in Eureka
                 .build();                       // Build the WebClient instance
     }
 

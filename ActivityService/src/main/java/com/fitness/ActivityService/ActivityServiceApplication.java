@@ -24,6 +24,7 @@ public class ActivityServiceApplication {
         String serviceName = "Fitness Activity Service";
         String activeProfile = "dev";
         String serverPort = "8080";
+
         String dbURI = "mongodb://localhost:27017";
         String kafkaURI = "localhost:9092";
         String zookeeperURI = "localhost:2181";
