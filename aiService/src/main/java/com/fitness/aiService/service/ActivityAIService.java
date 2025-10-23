@@ -167,7 +167,7 @@ public class ActivityAIService {
 
 
     private String createPromptForActivity(Activity activity) {
-
+        System.out.println("AI is running...");
         return String.format("""
         Analyze this fitness activity and provide detailed recommendations in the following EXACT JSON format:
         {
