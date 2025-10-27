@@ -22,12 +22,24 @@ public class UserService {
 
         // Check if email already exists
         if(repository.existsByEmail(request.getEmail())) {
-            throw new EmailAlreadyExistsException("Email already exists: " + request.getEmail());
+            User existingUser = repository.findByEmail(request.getEmail());
+
+            UserResponse response = new UserResponse();
+            response.setId(existingUser.getId());
+            response.setPassword(existingUser.getPassword());
+            response.setEmail(existingUser.getEmail());
+            response.setFirstName(existingUser.getFirstName());
+            response.setLastName(existingUser.getLastName());
+            response.setCreatedAt(existingUser.getCreatedAt());
+            response.setUpdatedAt(existingUser.getUpdatedAt());
+
+            return response; // Return the populated response
         }
 
         User user = new User();
         user.setEmail(request.getEmail());
         user.setFirstName(request.getFirstName());
+        user.setKeycloakId(request.getKeycloakId());
         user.setLastName(request.getLastName());
         user.setPassword(request.getPassword());
 
@@ -36,6 +48,7 @@ public class UserService {
         UserResponse response = new UserResponse();
         response.setId(savedUser.getId());
         response.setPassword(savedUser.getPassword());
+        response.setKeycloakId(savedUser.getKeycloakId());
         response.setEmail(savedUser.getEmail());
         response.setFirstName(savedUser.getFirstName());
         response.setLastName(savedUser.getLastName());
@@ -69,13 +82,15 @@ public class UserService {
 
 
 
-    public Boolean existByUserId(String userId) {
+    public Boolean existsByKeycloakId(String userId) {
      //   log.info("Calling User Service for {}", userId);
 
         log.info(RED + "C" + GREEN + "a" + YELLOW + "l" + BLUE + "l" + PURPLE + "i" + CYAN + "n" + RED + "g " +
                 GREEN + "U" + YELLOW + "s" + BLUE + "e" + PURPLE + "r " +
                 CYAN + "S" + RED + "e" + GREEN + "r" + YELLOW + "v" + BLUE + "i" + PURPLE + "c" + CYAN + "e" +
                 RESET + " for {}", userId);
-        return repository.existsById(userId);
+        return repository.existsByKeycloakId(userId);
     }
+
+
 }

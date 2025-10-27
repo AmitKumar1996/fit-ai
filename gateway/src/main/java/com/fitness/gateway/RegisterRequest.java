@@ -1,4 +1,4 @@
-package com.futness.userService.dto;
+package com.fitness.gateway;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -29,5 +29,5 @@ public class RegisterRequest {
     @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
     private String lastName;
 
-    private String keycloakId;
+    private String KeycloakId;
 }

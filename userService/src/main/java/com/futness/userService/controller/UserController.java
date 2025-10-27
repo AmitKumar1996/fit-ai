@@ -26,7 +26,8 @@ public class UserController {
     public ResponseEntity<Boolean> validateUser(@PathVariable String userId){
         // System.out.println("User Id"+""+userId);
         log.info("User Id {}", userId);
-        return ResponseEntity.ok(userService.existByUserId (userId));
+        return ResponseEntity.ok(userService
+                .existsByKeycloakId (userId));
     }
 
 
