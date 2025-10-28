@@ -56,6 +56,8 @@ public class keycloakUserSyncFilter implements WebFilter {
                         }
                     })
                     .then(Mono.defer(()->{
+
+
                         ServerHttpRequest mutatedRequset = (ServerHttpRequest) exchange.getRequest().mutate()
                                 .header("X-User-ID", finalUserId)
                                 .build();
