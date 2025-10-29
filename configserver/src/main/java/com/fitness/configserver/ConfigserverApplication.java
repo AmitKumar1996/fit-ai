@@ -88,6 +88,7 @@ public class ConfigserverApplication {
 		return PURPLE + "║ " + content + " ".repeat(Math.max(0, contentWidth - realLength)) + " ║" + RESET;
 	}
 
+
 	private static void printSystemDesign() {
 		System.out.println();
 		System.out.println(PURPLE + "╔════════════════════════════════════════════════════════╗" + RESET);
