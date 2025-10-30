@@ -86,6 +86,7 @@ public class ConfigserverApplication {
 		String content = String.format("%-20s : %s", label, valueColor + value + RESET);
 		int realLength = content.replaceAll("\u001B\\[[;\\d]*m", "").length();
 		return PURPLE + "║ " + content + " ".repeat(Math.max(0, contentWidth - realLength)) + " ║" + RESET;
+
 	}
 
 
