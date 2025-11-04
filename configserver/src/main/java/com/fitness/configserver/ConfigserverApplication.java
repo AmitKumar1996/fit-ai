@@ -25,6 +25,8 @@ public class ConfigserverApplication {
 
 	public static final String PURPLE = "\u001B[35m";
 
+
+
 	public static void main(String[] args) throws InterruptedException {
 
 		ConfigurableApplicationContext context = SpringApplication.run(ConfigserverApplication.class, args);
