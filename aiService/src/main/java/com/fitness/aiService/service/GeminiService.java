@@ -17,7 +17,6 @@ public class GeminiService {
     private String geminiApiUrl;
     @Value("${gemini.api.key}")
     private String getGeminiApiKey;
-
     public String getRecommendations(String details) {
         WebClient webClient = webClientBuilder.build();
 
