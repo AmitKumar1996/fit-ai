@@ -7,7 +7,6 @@ import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 public class GatewayApplication {
-
 	// ANSI color codes
 	public static final String RESET = "\u001B[0m";
 	public static final String GREEN = "\u001B[32m";
