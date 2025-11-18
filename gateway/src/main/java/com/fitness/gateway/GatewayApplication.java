@@ -17,10 +17,8 @@ public class GatewayApplication {
 	public static final String PURPLE = "\u001B[35m";
 
 	public static void main(String[] args) throws InterruptedException {
-
 		ConfigurableApplicationContext context = SpringApplication.run(GatewayApplication.class, args);
 		Environment env = context.getEnvironment();
-
 		// Dynamic values
 		String serviceName = "API Gateway Service";
 		String activeProfile = env.getActiveProfiles().length > 0 ? env.getActiveProfiles()[0] : "default";
