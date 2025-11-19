@@ -105,3 +105,13 @@ public class GatewayApplication {
 		System.out.println();
 	}
 }
+
+
+
+list.stream().sorted(Comprator.ReverseOrder()).collect.collectors.toList();
+
+
+
+
+       const[count, setCount]=useState(0);
+
