@@ -106,17 +106,10 @@ public class GatewayApplication {
 	}
 }
 
+//
+//
+//list.stream().sorted(Comprator.ReverseOrder()).collect.collectors.toList();
+//
+//
+//       const[count, setCount]=useState(0);
 
-
-list.stream().sorted(Comprator.ReverseOrder()).collect.collectors.toList();
-
-
-       const[count, setCount]=useState(0);
-
-2025-12-01 Evening Slot MMPC14 THEORY 2:00 PM - 5:00 PM -- leave
-2025-12-02 Evening Slot MMPC8 THEORY 2:00 PM - 5:00 PM---- leave
-2025-12-08 Evening Slot MMPC9 THEORY 2:00 PM - 5:00 PM
-2025-12-10 Evening Slot MMPC10 THEORY 2:00 PM - 5:00 PM
-2025-12-12 Evening Slot MMPC11 THEORY 2:00 PM - 5:00 PM--- leave
-2025-12-15 Evening Slot MMPC12 THEORY 2:00 PM - 5:00 PM--- leave
-2025-12-17
