@@ -106,8 +106,6 @@ public class GatewayApplication {
 	}
 }
 
-//
-//
 //list.stream().sorted(Comprator.ReverseOrder()).collect.collectors.toList();
 //
 //
