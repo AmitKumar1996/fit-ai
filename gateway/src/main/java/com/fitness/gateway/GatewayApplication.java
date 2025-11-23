@@ -100,7 +100,6 @@ public class GatewayApplication {
 		System.out.println(GREEN + "    👤 User   🤖 AI   🏃 Activity   ⚙️ Config" + RESET);
 		System.out.println("        |         |          |       |");
 		System.out.println(GREEN + "  🗄️ PostgreSQL  🔁 Redis  ☁️ Kafka  AWS S3" + RESET);
-
 		System.out.println(PURPLE + "╚════════════════════════════════════════════════════════╝" + RESET);
 		System.out.println();
 	}
