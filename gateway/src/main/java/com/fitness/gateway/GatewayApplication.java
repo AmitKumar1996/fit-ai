@@ -92,7 +92,6 @@ public class GatewayApplication {
 		System.out.println(PURPLE + "╔════════════════════════════════════════════════════════╗" + RESET);
 		System.out.println(PURPLE + "║" + CYAN + "             MICROSERVICES TOPOLOGY OVERVIEW            " + PURPLE + "║" + RESET);
 		System.out.println(PURPLE + "╠════════════════════════════════════════════════════════╣" + RESET);
-
 		System.out.println(GREEN + "  🧑‍💻 Client" + RESET + " → " + YELLOW + "🌐 API Gateway (8092)" + RESET);
 		System.out.println(YELLOW + "                |" + RESET);
 		System.out.println(YELLOW + "        -----------------------------" + RESET);
