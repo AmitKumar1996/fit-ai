@@ -79,14 +79,12 @@ public class GatewayApplication {
 		System.out.println("\n" + GREEN + "✅ Boot complete! " + CYAN + serviceName + " is up and routing traffic!" + RESET);
 		System.out.println();
 	}
-
 	private static String formatRow(String label, String value, String valueColor, int totalWidth) {
 		int contentWidth = totalWidth - 4;
 		String content = String.format("%-20s : %s", label, valueColor + value + RESET);
 		int realLength = content.replaceAll("\u001B\\[[;\\d]*m", "").length();
 		return PURPLE + "║ " + content + " ".repeat(Math.max(0, contentWidth - realLength)) + " ║" + RESET;
 	}
-
 	private static void printSystemDesign() {
 		System.out.println();
 		System.out.println(PURPLE + "╔════════════════════════════════════════════════════════╗" + RESET);
