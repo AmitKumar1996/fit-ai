@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 
+import java.util.HashMap;
+import java.util.TreeMap;
+
 @SpringBootApplication
 public class GatewayApplication {
 	// ANSI color codes
@@ -101,6 +104,73 @@ public class GatewayApplication {
 		System.out.println();
 	}
 }
+
+
+
+
+
+int A={1, 2 ,3, 4, 5,6};
+
+
+o/p:-  3, 4, 6, 1, 2
+
+
+		int ptr=0;
+         int ptr2=A.length-1;
+//for(int i=0;i<A.length;i++){
+//
+//	A[]
+//
+//		}
+
+while(ptr<ptr2){
+	int temp=A[ptr];
+	A[ptr]=A[ptr2];
+	A[ptr2]=temp;
+}
+//
+//1mg
+//
+//producer, consumer
+//
+//
+//6 5 4 3 2 1
+//
+//HashMap<Integer, Integer> map=new HashMap<>();
+//
+//map.put(1,10);
+//
+//map.put(2,20);
+//TreeMap<Integer, Integer> tree= new TreeMap<>();
+//
+//forEach(Integer i: map){
+//
+//	tree.put(i.key(),i.intValue());
+}
+
+m1();
+m1(int a);
+m1(int a, int b);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //list.stream().sorted(Comprator.ReverseOrder()).collect.collectors.toList();
 //
