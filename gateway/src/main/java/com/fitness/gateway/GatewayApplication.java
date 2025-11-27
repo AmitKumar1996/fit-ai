@@ -123,11 +123,11 @@ o/p:-  3, 4, 6, 1, 2
 //
 //		}
 
-while(ptr<ptr2){
-	int temp=A[ptr];
-	A[ptr]=A[ptr2];
-	A[ptr2]=temp;
-}
+//while(ptr<ptr2){
+//	int temp=A[ptr];
+//	A[ptr]=A[ptr2];
+//	A[ptr2]=temp;
+//}
 //
 //1mg
 //
