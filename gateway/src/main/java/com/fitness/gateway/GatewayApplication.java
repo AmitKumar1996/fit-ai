@@ -108,15 +108,15 @@ public class GatewayApplication {
 
 
 
-
-int A={1, 2 ,3, 4, 5,6};
-
-
-o/p:-  3, 4, 6, 1, 2
-
-
-		int ptr=0;
-         int ptr2=A.length-1;
+//
+//int A={1, 2 ,3, 4, 5,6};
+//
+//
+//o/p:-  3, 4, 6, 1, 2
+//
+//
+//		int ptr=0;
+//         int ptr2=A.length-1;
 //for(int i=0;i<A.length;i++){
 //
 //	A[]
