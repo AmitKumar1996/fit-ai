@@ -145,13 +145,13 @@ public class GatewayApplication {
 //
 //forEach(Integer i: map){
 //
-//	tree.put(i.key(),i.intValue());
-}
-
-m1();
-m1(int a);
-m1(int a, int b);
-
+////	tree.put(i.key(),i.intValue());
+//}
+//
+//m1();
+//m1(int a);
+//m1(int a, int b);
+//
 
 
 
