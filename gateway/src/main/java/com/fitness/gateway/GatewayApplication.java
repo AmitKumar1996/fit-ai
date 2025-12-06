@@ -149,26 +149,59 @@ public class GatewayApplication {
 
 
 
+Transactions(ID(PK) , type, amount, date)
+
+select * from Transactions  as t where  date(DD-MM-YYYY-MM-HH)==??-??-????-??-?? > ??-??-????-??-??; (select count(type))
+
+
+
+classs Transactions{
+
+        }
+
+
+Map<String, Long >transactionMap=transactions.stream().collect(collectors.groupingby(i->i, collectors.count())).entrySet().collecters(Transactions :: getType);
+
+IT->6
+BPO->9
 
 
 
 
 
+{
+  CREDIT: 651.00,
+  DEBIT: 120.00,
+  REFUND: 170.50
+}
+
+public static void main(String[] args) {
+    List<Transaction> transactions = Arrays.asList(
+                new Transaction(1, 101, 250.75, "CREDIT", "SUCCESS",  1737165600000L), // 2025-01-18 10:00:00
+    new Transaction(2, 102, 120.00, "DEBIT",  "SUCCESS",  1737169200000L), // 2025-01-18 11:00:00
+    new Transaction(3, 101, 450.00, "CREDIT", "FAILED",   1737136800000L), // 2025-01-18 02:00:00
+    new Transaction(4, 103,  80.50, "REFUND", "SUCCESS",  1737176400000L), // 2025-01-18 13:00:00
+    new Transaction(5, 104, 600.00, "DEBIT",  "SUCCESS",  1737087600000L), // 2025-01-17 12:00:00 (day before)
+    new Transaction(6, 101, 100.25, "CREDIT", "SUCCESS",  1737165600000L), // 2025-01-18 10:00:00
+    new Transaction(7, 102, 220.00, "DEBIT",  "FAILED",   1737172800000L), // 2025-01-18 12:00:00
+    new Transaction(8, 103,  50.00, "CREDIT");
+
+    transactions.stream().collect(collecters.groupingby(i->i, collectors.count())),Transactions :: getDate  )
+    .entryset().collect(collectors.groupingby(i->i, Transactions:: getType)).sum(Transactions::getAmount);
+
+}
 
 
 
+@Data
+class Transactions{
 
+ long id;
+ double amount;
+ String type;
+ String status;
+ Date date;
 
+}
 
-
-
-
-
-
-
-
-//list.stream().sorted(Comprator.ReverseOrder()).collect.collectors.toList();
-//
-//
-//       const[count, setCount]=useState(0);
 
