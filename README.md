@@ -7,6 +7,9 @@
 ![React](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react)  
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-DB-blue?style=flat&logo=postgresql)  
 
+![Project Image](image.png)
+
+
 ---
 
 ## 📌 Overview  
