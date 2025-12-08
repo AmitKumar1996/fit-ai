@@ -18,7 +18,6 @@ public class GatewayApplication {
 	public static final String BLUE = "\u001B[34m";
 	public static final String CYAN = "\u001B[36m";
 	public static final String PURPLE = "\u001B[35m";
-
 	public static void main(String[] args) throws InterruptedException {
 		ConfigurableApplicationContext context = SpringApplication.run(GatewayApplication.class, args);
 		Environment env = context.getEnvironment();
