@@ -26,7 +26,6 @@ public class GatewayApplication {
 		String activeProfile = env.getActiveProfiles().length > 0 ? env.getActiveProfiles()[0] : "default";
 		String serverPort = env.getProperty("server.port", "8092");
 		String techStack = "Spring Cloud Gateway → Java → Spring Boot → Netflix OSS → CI/CD → AWS";
-
 		// Microservices and their ports
 		String[][] services = {
 				{"Eureka Server", "8761"},
