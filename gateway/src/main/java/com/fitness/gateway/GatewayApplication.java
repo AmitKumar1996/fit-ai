@@ -35,7 +35,6 @@ public class GatewayApplication {
 				{"Activity Service", "8085"},
 				{"Config Server", "8090"}
 		};
-
 		String profileColor = activeProfile.equals("prod") ? RED :
 				activeProfile.equals("dev") ? YELLOW : BLUE;
 
