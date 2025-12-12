@@ -48,7 +48,6 @@ public class GatewayApplication {
 		System.out.println(PURPLE + "║" + " ".repeat(padding) + CYAN + title + PURPLE +
 				" ".repeat(totalWidth - 2 - title.length() - padding) + "║" + RESET);
 		System.out.println(PURPLE + "╠" + "═".repeat(totalWidth - 2) + "╣" + RESET);
-
 		System.out.println(formatRow("Service Name", serviceName, YELLOW, totalWidth));
 		System.out.println(formatRow("Active Profile", activeProfile, profileColor, totalWidth));
 		System.out.println(formatRow("Server Port", serverPort, GREEN, totalWidth));
