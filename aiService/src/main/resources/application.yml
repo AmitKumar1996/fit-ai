@@ -3,7 +3,6 @@
 # ================================
 server:
   port: 8086  # Port on which the application will run
-
 spring:
   application:
     name: ai-service  # Unique service name registered in Eureka
