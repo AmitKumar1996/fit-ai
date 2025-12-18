@@ -55,3 +55,8 @@ spring:
 #  instance:
 #    lease-renewal-interval-in-seconds: 10   # Frequency of heartbeats sent to Eureka (default is 30 seconds)
 #    lease-expiration-duration-in-seconds: 30  # Time after which Eureka considers the service DOWN (default is 90 seconds)
+
+
+String s="amitkumar";
+
+Map<charector, Long> frequencyMap=s.mapToObj(c->(char)c).collect(Collectors.GroupBy(c->c,LinkedHapMap :: New, collectors.Count()));

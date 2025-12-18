@@ -45,7 +45,6 @@ public class ActivityController {
         // 🟩 Step 4️⃣ : Client ko final response bhejne se pehle log
         log.info(GREEN + "🟩 Step 4: Sending final response to client for userId={}" + RESET,
                 request.getUserId());
-
         return ResponseEntity.ok(response);
     }
 
