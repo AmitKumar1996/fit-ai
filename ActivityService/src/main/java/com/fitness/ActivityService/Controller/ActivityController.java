@@ -37,7 +37,6 @@ public class ActivityController {
         log.info(YELLOW + "🟨 Step 2: Sending request to ActivityService..." + RESET);
 
         ActivityResponce response = activityService.trackActivity(request);
-
         // 🟦 Step 3️⃣ : Service se response milne par log
         log.info(CYAN + "🟦 Step 3: Response received from ActivityService for userId={} -> {}" + RESET,
                 request.getUserId(), response);
