@@ -32,7 +32,6 @@ public class ActivityController {
         // 🟩 Step 1️⃣ : Request receive hone par log
         log.info(BLUE + "🟩 Step 1: Received ActivityRequest -> userId={}, type={}, duration={}" + RESET,
                 request.getUserId(), request.getType(), request.getDuration());
-
         // 🟨 Step 2️⃣ : Service call karne se pehle log
         log.info(YELLOW + "🟨 Step 2: Sending request to ActivityService..." + RESET);
         ActivityResponce response = activityService.trackActivity(request);
