@@ -28,7 +28,6 @@ public class ActivityController {
 
     @PostMapping
     public ResponseEntity<ActivityResponce> trackActivity(@RequestBody ActivityRequest request) {
-
         // 🟩 Step 1️⃣ : Request receive hone par log
         log.info(BLUE + "🟩 Step 1: Received ActivityRequest -> userId={}, type={}, duration={}" + RESET,
                 request.getUserId(), request.getType(), request.getDuration());
