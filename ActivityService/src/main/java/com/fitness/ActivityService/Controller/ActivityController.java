@@ -25,7 +25,6 @@ public class ActivityController {
     private static final String YELLOW = "\u001B[33m";
     private static final String CYAN = "\u001B[36m";
     private static final String RESET = "\u001B[0m";
-
     @PostMapping
     public ResponseEntity<ActivityResponce> trackActivity(@RequestBody ActivityRequest request) {
         // 🟩 Step 1️⃣ : Request receive hone par log
